@@ -68,18 +68,23 @@ class MoneyTests: XCTestCase {
     XCTAssert(twelveUSD.amount == usd.amount)
     XCTAssert(twelveUSD.currency == usd.currency)
   }
-  
   func testAddUSDtoUSD() {
     let total = tenUSD.add(tenUSD)
     XCTAssert(total.amount == 20)
     XCTAssert(total.currency == "USD")
   }
-  
   func testAddUSDtoGBP() {
     let total = tenUSD.add(fiveGBP)
     XCTAssert(total.amount == 10)
     XCTAssert(total.currency == "GBP")
   }
+    //extra credit
+  func testSubtractUSDtoGBP() {
+    let result = tenUSD.subtract(fiveGBP)  // 10 USD = 5 GBP, 5 GBP - 5 GBP = 0 GBP
+    XCTAssert(result.amount == 0)
+    XCTAssert(result.currency == "GBP")
+  }
+
 
     static var allTests = [
         ("testCanICreateMoney", testCanICreateMoney),
