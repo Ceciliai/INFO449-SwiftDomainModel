@@ -85,6 +85,7 @@ class MoneyTests: XCTestCase {
     XCTAssert(result.currency == "GBP")
   }
 
+    
 
     static var allTests = [
         ("testCanICreateMoney", testCanICreateMoney),
@@ -101,6 +102,7 @@ class MoneyTests: XCTestCase {
         
         ("testAddUSDtoUSD", testAddUSDtoUSD),
         ("testAddUSDtoGBP", testAddUSDtoGBP),
+        ("testSubtractUSDtoGBP", testSubtractUSDtoGBP)
     ]
 }
 

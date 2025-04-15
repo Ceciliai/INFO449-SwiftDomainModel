@@ -105,6 +105,16 @@ public class Job {
             self.type = .Salary(UInt(increased))
         }
     }
+    public func convert() {
+        switch self.type {
+        case .Hourly(let rate):
+            let salaryEstimate = rate * 2000
+            let roundedSalary = UInt(((salaryEstimate + 999) / 1000).rounded(.down)) * 1000
+            self.type = .Salary(roundedSalary)
+        case .Salary(_):
+            break
+        }
+    }
 }
 
 ////////////////////////////////////
@@ -117,9 +127,7 @@ public class Person {
 
     private var _job: Job? = nil
     public var job: Job? {
-        get {
-            return _job
-        }
+        get { return _job }
         set {
             if age >= 16 {
                 _job = newValue
@@ -129,9 +137,7 @@ public class Person {
 
     private var _spouse: Person? = nil
     public var spouse: Person? {
-        get {
-            return _spouse
-        }
+        get { return _spouse }
         set {
             if age >= 16 {
                 _spouse = newValue
@@ -139,11 +145,17 @@ public class Person {
         }
     }
 
-    public init(firstName: String, lastName: String, age: Int) {
-        self.firstName = firstName
-        self.lastName = lastName
-        self.age = age
-    }
+    //extra
+    public init(firstName: String = "", lastName: String = "", age: Int) {
+            if firstName == "" && lastName == "" {
+                self.firstName = "Unknown"
+                self.lastName = ""
+            } else {
+                self.firstName = firstName
+                self.lastName = lastName
+            }
+            self.age = age
+        }
 
     public func toString() -> String {
         let jobStr = job != nil ? "\(job!.type)" : "nil"

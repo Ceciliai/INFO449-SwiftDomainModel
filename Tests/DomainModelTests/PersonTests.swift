@@ -27,11 +27,36 @@ class PersonTests: XCTestCase {
         mike.spouse = Person(firstName: "Bambi", lastName: "Jones", age: 42)
         XCTAssert(mike.spouse != nil)
     }
+    //extra credit
+    func testSingleNamePerson_FirstOnly() {
+        let beyonce = Person(firstName: "Beyonce", age: 42)
+        XCTAssert(beyonce.firstName == "Beyonce")
+        XCTAssert(beyonce.lastName == "")
+        XCTAssert(beyonce.toString().contains("firstName:Beyonce"))
+    }
+
+    func testSingleNamePerson_LastOnly() {
+        let bono = Person(lastName: "Bono", age: 43)
+        XCTAssert(bono.firstName == "")
+        XCTAssert(bono.lastName == "Bono")
+        XCTAssert(bono.toString().contains("lastName:Bono"))
+    }
+
+    func testEmptyNameBecomesUnknown() {
+        let unknown = Person(age: 99)
+        XCTAssert(unknown.firstName == "Unknown")
+        XCTAssert(unknown.lastName == "")
+        XCTAssert(unknown.toString().contains("firstName:Unknown"))
+    }
+
 
     static var allTests = [
         ("testPerson", testPerson),
         ("testAgeRestrictions", testAgeRestrictions),
         ("testAdultAgeRestrictions", testAdultAgeRestrictions),
+        ("testSingleNamePerson_FirstOnly", testSingleNamePerson_FirstOnly),
+        ("testSingleNamePerson_LastOnly", testSingleNamePerson_LastOnly),
+        ("testEmptyNameBecomesUnknown", testEmptyNameBecomesUnknown),
     ]
 }
 
